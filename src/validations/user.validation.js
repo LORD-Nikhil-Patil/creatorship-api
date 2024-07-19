@@ -27,16 +27,26 @@ const getUser = {
 };
 
 const updateUser = {
-  params: Joi.object().keys({
-    userId: Joi.required().custom(objectId),
+  params: Joi.object({
+    userId: Joi.string().required().custom(objectId),
   }),
-  body: Joi.object()
-    .keys({
-      email: Joi.string().email(),
-      password: Joi.string().custom(password),
-      name: Joi.string(),
-    })
-    .min(1),
+  body: Joi.object({
+    email: Joi.string().email(),
+    password: Joi.string().custom(password),
+    name: Joi.string(),
+    proposals: Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/)),
+    first_name: Joi.string().trim(),
+    last_name: Joi.string().trim(),
+    country: Joi.string().trim(),
+    address: Joi.string().trim(),
+    city: Joi.string().trim(),
+    state: Joi.string().trim(),
+    zip: Joi.string().trim(),
+    username: Joi.string().trim(),
+    about: Joi.string().trim(),
+    photo: Joi.string().uri().allow(''),
+    coverPhoto: Joi.string().uri().allow(''),
+  }).min(1),
 };
 
 const deleteUser = {

@@ -40,6 +40,49 @@ const userSchema = mongoose.Schema(
     proposals: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Proposal" }],
     },
+    first_name:{
+      type: String,
+      trim: true
+    },
+    last_name:{
+      type: String,
+      trim: true
+    },
+    country:{
+      type: String,
+      trim: true
+    },
+    address:{
+      type: String,
+      trim: true
+    },
+    city:{
+      type: String,
+      trim: true
+    },
+    state:{
+      type: String,
+      trim: true
+    },
+    zip:{
+      type: String,
+      trim: true
+    },
+    username:{
+      type: String,
+      trim: true,
+      private: true
+    },
+    about:{
+      type: String,
+      trim: true
+    },
+    photo:{
+      type: String
+    },
+    coverPhoto:{
+      type: String
+    },
     role: {
       type: String,
       enum: roles,
