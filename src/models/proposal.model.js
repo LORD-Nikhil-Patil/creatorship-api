@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 
 const proposalSchema = mongoose.Schema(
   {
@@ -19,6 +19,7 @@ const proposalSchema = mongoose.Schema(
 );
 
 proposalSchema.plugin(toJSON);
+proposalSchema.plugin(paginate);
 
 const Proposal = mongoose.model("Proposal", proposalSchema);
 

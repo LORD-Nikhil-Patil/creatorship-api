@@ -37,6 +37,12 @@ router
     userController.deleteUser
   );
 
+router
+  .route("/proposal")
+  .post(
+    userController.updateProposal
+  )
+
 module.exports = router;
 
 /**

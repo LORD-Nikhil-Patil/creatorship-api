@@ -48,6 +48,10 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true
     },
+    gender:{
+      type: String,
+      trim: true
+    },
     country:{
       type: String,
       trim: true
@@ -74,6 +78,11 @@ const userSchema = mongoose.Schema(
       private: true
     },
     about:{
+      type: String,
+      trim: true,
+      maxlength: 15,
+    },
+    heading:{
       type: String,
       trim: true
     },

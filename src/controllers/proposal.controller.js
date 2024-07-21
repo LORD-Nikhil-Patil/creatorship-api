@@ -12,7 +12,13 @@ const getProposal = catchAsync(async (req, res) => {
   res.send(proposal);
 });
 
+const getProposals = catchAsync(async (req, res) => {
+  const Proposals = await proposalService.queryProposals(req.body);
+  res.send(Proposals)
+})
+
 module.exports = {
   createProposal,
   getProposal,
+  getProposals
 };
