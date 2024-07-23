@@ -45,9 +45,8 @@ const updateUser = {
     zip: Joi.string().trim(),
     username: Joi.string().trim(),
     about: Joi.string().trim(),
-    heading: Joi.string().trim(),
-    photo: Joi.string().uri().allow(''),
-    coverPhoto: Joi.string().uri().allow(''),
+    photo: Joi.string(),
+    coverPhoto: Joi.string(),
   }).min(1),
 };
 

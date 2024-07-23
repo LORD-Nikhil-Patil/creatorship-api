@@ -35,7 +35,10 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 const updateProposal = catchAsync(async (req, res) => {
-  const user = await userService.addProposal(req.body.userId, req.body.proposalId);
+  const user = await userService.addProposal(
+    req.body.userId,
+    req.body.proposalId
+  );
   res.send(user);
 });
 
@@ -45,5 +48,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
-  updateProposal
+  updateProposal,
 };

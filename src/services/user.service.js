@@ -1,15 +1,14 @@
 const httpStatus = require("http-status");
 const { User } = require("../models");
 const ApiError = require("../utils/ApiError");
-const _ = require("lodash");
-const proposals = require("./proposal.service")
+const proposals = require("./proposal.service");
 /**
  * Create a user
  * @param {Object} userBody
  * @returns {Promise<User>}
  */
 const createUser = async (userBody) => {
-  const { proposals, ...body } = userBody;
+  let { proposals, ...body } = userBody;
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
   }
@@ -38,8 +37,8 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  const user = await User.findById(id).populate('proposals').exec();
-    return user;
+  const user = await User.findById(id).populate("proposals").exec();
+  return user;
 };
 
 /**
@@ -48,7 +47,7 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email }).populate('proposals').exec();
+  return User.findOne({ email }).populate("proposals").exec();
 };
 
 /**
@@ -65,7 +64,7 @@ const updateUserById = async (userId, updateBody) => {
   // if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
   //   throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
   // }
-  const { email, name, ...data } = updateBody;
+  const { email, name, photo, ...data } = updateBody;
   Object.assign(user, data);
   await user.save();
   return user;
@@ -94,7 +93,9 @@ const addProposal = async (userId, proposalId) => {
 
     const proposalIdStr = proposalId.toString();
 
-    const proposalExists = user.proposals.some(proposal => proposal.toString() === proposalIdStr);
+    const proposalExists = user.proposals.some(
+      (proposal) => proposal.toString() === proposalIdStr
+    );
     const isProposal = await proposals.findProposal(proposalId);
     if (!isProposal) {
       throw new Error("Proposal not found");
@@ -107,15 +108,13 @@ const addProposal = async (userId, proposalId) => {
         { new: true, runValidators: true, useFindAndModify: false }
       );
       return userWithProposals;
-    } else {
-      return user;
     }
+    return user;
   } catch (error) {
     console.error("Error adding proposal:", error);
     throw error;
   }
 };
-
 
 module.exports = {
   createUser,
@@ -124,5 +123,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
-  addProposal
+  addProposal,
 };

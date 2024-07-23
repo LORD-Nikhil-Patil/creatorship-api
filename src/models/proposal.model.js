@@ -11,11 +11,14 @@ const proposalSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    application: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Application" }],
+    },
   },
   {
     timestamps: true,
-  },
-  { collection: "proposal" }
+    collection: "proposals",
+  }
 );
 
 proposalSchema.plugin(toJSON);
